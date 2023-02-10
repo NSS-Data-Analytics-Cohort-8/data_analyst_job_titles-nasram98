@@ -34,17 +34,34 @@ group by location
 order by AVG_rating Desc;
 -- 7.	Select unique job titles from the data_analyst_jobs table. How many are there?
 select distinct title
-from data_analyst_jobs
+from data_analyst_jobs;
 -- 8.	How many unique job titles are there for California companies?
-
+select title
+from data_analyst_jobs
+Where location ='CA';
 -- 9.	Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. How many companies are there with more that 5000 reviews across all locations?
-
+Select 
+company,
+AVG(star_rating) AS Avg_rating
+from data_analyst_jobs
+WHERE review_count >5000
+group by company ;
 -- 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
-
+Select 
+company,
+AVG(star_rating) AS Avg_rating
+from data_analyst_jobs
+WHERE review_count >5000
+group by company
+order by AVG_rating desc;
 -- 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
-
+select title
+from data_analyst_jobs
+where title like '%Analyst%';
 -- 12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
-
+select title
+from data_analyst_jobs
+where title NOT LIKE '%Analyst%' 
 -- **BONUS:**
 -- You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
 --  - Disregard any postings where the domain is NULL. 
